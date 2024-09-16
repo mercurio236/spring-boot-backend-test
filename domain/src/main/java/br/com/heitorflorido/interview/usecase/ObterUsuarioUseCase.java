@@ -1,6 +1,5 @@
 package br.com.heitorflorido.interview.usecase;
 
-
 import br.com.heitorflorido.interview.gateway.ObterUsuarioGateway;
 import br.com.heitorflorido.interview.model.Usuario;
 import lombok.RequiredArgsConstructor;
