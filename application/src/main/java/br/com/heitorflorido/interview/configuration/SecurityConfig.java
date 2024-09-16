@@ -3,6 +3,8 @@ package br.com.heitorflorido.interview.configuration;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+
+import org.h2.tools.Server;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -35,12 +37,12 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.cors(c -> c.configurationSource(corsConfigurationSource()))
-            .csrf(AbstractHttpConfigurer::disable)
-            .formLogin(AbstractHttpConfigurer::disable)
-            .httpBasic(AbstractHttpConfigurer::disable)
-            .exceptionHandling(e -> e.authenticationEntryPoint(restAuthenticationEntryPoint()))
-            .authorizeHttpRequests(a -> a.anyRequest().permitAll())
-            .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+                .csrf(AbstractHttpConfigurer::disable)
+                .formLogin(AbstractHttpConfigurer::disable)
+                .httpBasic(AbstractHttpConfigurer::disable)
+                .exceptionHandling(e -> e.authenticationEntryPoint(restAuthenticationEntryPoint()))
+                .authorizeHttpRequests(a -> a.anyRequest().permitAll())
+                .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
         return http.build();
     }
@@ -69,6 +71,19 @@ public class SecurityConfig {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
+    }
+
+    @Bean
+    org.h2.tools.Server h2Server() {
+        Server server = new Server();
+        try {
+            server.runTool("-tcp");
+            server.runTool("-tcpAllowOthers");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return server;
+
     }
 
     @Component
