@@ -5,7 +5,7 @@ import javax.inject.Named;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import br.com.heitorflorido.interview.gateway.CadastroUsuarioGeteway;
+import br.com.heitorflorido.interview.gateway.UsuarioGatway;
 import br.com.heitorflorido.interview.model.Usuario;
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Mono;
@@ -16,9 +16,9 @@ import reactor.core.publisher.Mono;
 public class CadastroUsuarioUseCase {
 
     @Autowired
-    private CadastroUsuarioGeteway cadastroUsuarioGeteway;
+    private UsuarioGatway usuarioGatway;
 
     public Mono<Usuario> execute(Usuario user) {
-        return cadastroUsuarioGeteway.registerUser(user);
+        return usuarioGatway.registrarUser(user);
     }
 }

@@ -6,7 +6,7 @@ import javax.inject.Named;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import br.com.heitorflorido.interview.gateway.ListarUsuarioGateway;
+import br.com.heitorflorido.interview.gateway.UsuarioGatway;
 import br.com.heitorflorido.interview.model.Usuario;
 import lombok.RequiredArgsConstructor;
 
@@ -15,9 +15,9 @@ import lombok.RequiredArgsConstructor;
 public class ListarUsuarioUseCase {
     
     @Autowired
-    private ListarUsuarioGateway listarUsuarioGateway;
+    private UsuarioGatway usuarioGatway;
 
     public List<Usuario> execute(){
-        return listarUsuarioGateway.listarUsuario();
+        return usuarioGatway.listarUsuario();
     }
 }

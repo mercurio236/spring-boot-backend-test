@@ -4,7 +4,7 @@ import javax.inject.Named;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import br.com.heitorflorido.interview.gateway.DeletarUsuarioGateway;
+import br.com.heitorflorido.interview.gateway.UsuarioGatway;
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Mono;
 
@@ -13,9 +13,9 @@ import reactor.core.publisher.Mono;
 public class DeletarUsuarioUseCase {
 
     @Autowired
-    private DeletarUsuarioGateway deletarUsuarioGateway;
+    private UsuarioGatway usuarioGatway;
 
     public Mono<Void> execute(Long id){
-        return deletarUsuarioGateway.deletarUsuario(id);
+        return usuarioGatway.deletarUsuario(id);
     }
 }
