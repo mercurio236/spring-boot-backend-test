@@ -23,4 +23,5 @@ public class UsuarioResponse {
             .uf(usuario.getUf())
             .build();
     }
+    
 }
